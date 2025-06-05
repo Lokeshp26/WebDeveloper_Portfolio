@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lokesh Portfolio</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #7a6bb1;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo img {
+     width: 90px;
+		height: auto;
+		display: block;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    nav a:hover {
+    
+		color: #000000;
+
+
+    }
+
+    .hero {
+      background-image: url("images/Bg1.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+      text-align: center;
+      color: white;
+      padding: 2rem 1rem;
+    }
+
+    .hero img {
+      width: 350px;
+      height: auto;
+      border-top-left-radius: 50px;
+	  border-bottom-right-radius: 50px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero h1 {
+      margin-top: 1rem;
+      font-size: 2rem;
+    }
+
+    .hero p {
+      font-style: italic;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background-color: #502B83;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #4739a1;
+    }
+
+    .about {
+      background-color: #f5ddea;
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+
+    .about h2 {
+      margin-bottom: 2rem;
+    }
+
+    .about-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 1000px;
+      margin: 0;
+    }
+
+    .about img {
+      width: 337px;
+      height: auto;
+     border-bottom-left-radius: 80px;
+	 margin-left: 100px;
+    }
+
+    .about-text {
+      background-color: #9a5d84;
+      color: white;
+      padding-top:4rem;
+		padding-bottom: 4rem;
+		padding-left: 1.8rem;
+		padding-right: 1.8rem;
+      border-top-right-radius:80px; 
+      max-width: 1000px;
+      text-align: left;
+	  margin-right: 100px;
+		font-size: 17px;
+    }
+
+    .about-text h3 {
+      margin-bottom: 0.3rem;
+    }
+
+    .portfolio {
+      padding: 3rem 1rem;
+      text-align: center;
+      background-color: #fff;
+    }
+
+    .portfolio img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+	 .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 40px;
+    }
+	    .card-container {
+      perspective: 1000px;
+    }
+
+    .card {
+      width: 100%;
+      height: 280px;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+
+    .card-container:hover .card {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .card-front {
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-back {
+      background: #b597ae;
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .preview-btn {
+      background-color: #5a2a9c;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 65% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 1350px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: black;
+    } 
+	  
+	  
+    .resume-btn {
+      margin-top: 2rem;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 1rem 1rem;
+      text-align: center;
+    }
+
+    footer .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: auto;
+      margin-bottom: 1rem;
+    }
+
+    footer .contact-info,
+    footer .social {
+      margin: 1rem;
+    }
+
+    .social a {
+      margin: 0 0.5rem;
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+    }
+	          .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #7b6bb1;
+            padding: 16px 140px;
+        }
+        .navbar .logo {
+/*
+            font-weight: bold;
+            background: white;
+            padding: 2px 2px;
+            border-radius: 5px;
+*/
+        }
+        .nav-links {
+            display: flex;
+            gap: 60px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+    .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 4px 0;
+        } 
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+      .about-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-text {
+        text-align: left;
+      }
+
+      .footer-top {
+        flex-direction: row;
+      }
+	     .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 40px;
+    }
+    .footer_flex{
+      flex: 1 1 200px;
+    margin: 10px;
+    padding: 10px;
+    }
+
+
+    .card-container {
+      perspective: 1000px;
+    }
+
+    .card {
+      width: 100%;
+      height: 280px;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+
+    .card-container:hover .card {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .card-front {
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-back {
+      background: #b597ae;
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .preview-btn {
+      background-color: #5a2a9c;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+   .preview-btn :hover{
+  
+      transform: scale(2,2);
+      transition-duration: ease-in-out;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: black;
+    }
+	  .section2{
+		  display: flex;
+		  align-items: center;
+		  justify-content: space-around;
+	  }
+	  
+	  
+/*	  Mobile section*/
+	      @media (max-width: 900px) {
+			  .section2{
+		  display: block !important;
+		  align-items: center;
+		  justify-content: space-around;
+	  }
+
+		    nav a:hover {
+	font-size: 20px;
+	line-height: 24px;
+		color: #000000;
+		font-weight: bold;
+	transform: scale(1);
+  transition: all .6s ease-in-out;
+
+    }
+		    .modal-content {
+      background-color: white;
+      margin: 550% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 1350px;
+    }
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .about-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-text {
+        text-align: center;
+      }
+
+      .footer-top {
+        flex-direction: column;
+      }
+			     .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+		    .about {
+      background-color: #f5ddea;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+			      .about img {
+      width: 90%;
+      height: auto;
+     border-bottom-left-radius: 80px;
+	 margin:auto;
+    }
+
+    .about-text {
+      background-color: #9a5d84;
+      color: white;
+      padding-top:2.5rem;
+		padding-bottom: 2.5rem;
+		padding-left: 1.8rem;
+		padding-right: 1.8rem;
+      border-top-right-radius:80px; 
+      max-width: 1000px;
+      text-align: left;
+	  margin-right: 0px;
+		font-size: 15px;
+		margin-top: 40px;
+    }
+	          .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #7b6bb1;
+            padding: 16px 40px;
+        }
+						    .hero img {
+      width: 250px;
+      height: auto;
+      border-top-left-radius: 50px;
+	  border-bottom-right-radius: 50px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+		    .hero {
+      background-image: url("images/Bg1.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+      text-align: center;
+      color: white;
+      padding: 1.5rem 1rem;
+    }	  
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1.2rem;
+      background-color: #5e4ec4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      text-decoration: none;
+      cursor: pointer;
+    }		  
+	    footer {
+      background-color: #333;
+      color: white;
+      padding: 2rem 1rem 0.5rem 1rem;
+      text-align: center;
+    }		  
+		    .logo img {
+     width: 80px;
+		height: auto;
+		display: block;
+    }	  
+			  
+			*fo*fo  
+			  
+			  
+			  
+    }
+	    
+    @media (max-width: 500px) {
+		   .footer_flex{
+      flex: 0px;
+    margin: 0px;
+    padding: 0px;
+    }
+
+		            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                right: 0;
+				left: 0px;
+                background-color: #7b6bb1;
+                flex-direction: column;
+                width: 96%;
+                border-radius: 5px;
+                padding: 10px;
+						margin: auto;
+						margin-top: 20px;
+						gap:20px;
+				
+            }
+            .nav-links a {
+                padding: 10px;
+				padding-left: 5px;
+				border-bottom: 2px solid #ffffff;
+
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+		   .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+        }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo"><img src="images/logo_5.jpg"></div>
+        <div class="nav-links" id="navLinks">
+            <a href="#">Home</a>
+            <a href="#about">About me</a>
+            <a href="#portf">Portfolio</a>
+            <a href="#contact">Contact me</a>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+
+  <section class="hero">
+    <img src="images/img2.jpg" alt="Lorel " />
+    <h1>Lokesh P</h1>
+    <p>Email-Developer | Web-developer</p>
+    <a class="btn" href="#about">Know More</a>
+  </section>
+
+  <section class="about" id="about">
+    <h2>About me</h2>
+	  <div class="section2">
+    <div class="about-content">
+      <img src="images/img3.jpg" alt="Lokesh P"  />
+
+    </div>
+	        <div class="about-text">
+        <h3 style="text-align: left">Lokesh</h3>
+        <p style="text-align: left; margin: 0; margin-top: 18px; margin-bottom: 15px;"><i>Email-Developer</i></p>
+        <p style="text-align: left">
+    Email Developer with over 2 years of hands-on experience specializing in creating and optimizing responsive email templates. Proven ability to translate user requirements into functional and visually appealing email designs. Skilled in developing templates using modern frameworks and CMS blocks, particularly with MAPP CMS, ensuring seamless integration and performance.Proficient in testing and debugging with Email on Acid to deliver bug-free, responsive email solutions. Additionally, possesses a strong foundation in web page development and AMP mailers, bringing a comprehensive understanding of both email and web technologies to every project. I bring a strong attention to detail and a commitment to delivering bug-free, responsive email solutions that enhance user engagement and drive results. My approach combines technical proficiency with creative problem-solving to produce email templates that are both functional and visually engaging.
+        </p>
+      </div>
+		  </div>
+  </section>
+
+
+  <section class="portfolio-grid" id="portf">
+    <div class='card-container'>
+      <div class='card'>
+        <div class='card-front'>
+          <img src='images/standard_html.jpg' alt='Loki'>
+        </div>
+        <div class='card-back'>
+          <h3>Standard Email Template</h3>
+          <p>Email Template with background image section</p>
+          <button class="preview-btn" ><a href="https://lokeshp26.github.io/Standard_HTML/" target="_blank" style="color: #ffffff; text-decoration: none; font-size: 13px; font-weight: bold;"> Click to Preview</a></button>
+        </div>
+      </div>
+    </div>
+    <div class='card-container'>
+      <div class='card'>
+        <div class='card-front'>
+          <img src='images/interactive_email.jpg' alt='Template 2'>
+        </div>
+        <div class='card-back'>
+          <h3>Interative E-mailer</h3>
+          <p>Offering a dynamic and interactive experience</p>
+          <button class="preview-btn" ><a href="https://lokeshp26.github.io/Interactive_Html/" target="_blank" style="color: #ffffff; text-decoration: none; font-size: 13px; font-weight: bold;"> Click to Preview</a></button>
+        </div>
+      </div>
+    </div>
+    <div class='card-container'>
+      <div class='card'>
+        <div class='card-front'>
+          <img src='images/img_based_v.jpg' alt='Template 3'>
+        </div>
+        <div class='card-back'>
+          <h3>Newsletter Template</h3>
+          <p>Weekly newsletter format</p>
+          <button class="preview-btn" ><a href="https://lokeshp26.github.io/Image_based_Html/" target="_blank" style="color: #ffffff; text-decoration: none; font-size: 13px; font-weight: bold;"> Click to Preview</a></button>
+        </div>
+      </div>
+    </div>
+    <div class='card-container'>
+      <div class='card'>
+        <div class='card-front'>
+          <img src='images/cms.jpg' alt='Template 4'>
+        </div>
+        <div class='card-back'>
+          <h3>CMS Block</h3>
+          <p>A modular unit of reusable content</p>
+          <button class="preview-btn" ><a href="https://lokeshp26.github.io/CMS/" target="_blank" style="color: #ffffff; text-decoration: none; font-size: 13px; font-weight: bold;"> Click to Preview</a></button>
+        </div>
+      </div>
+    </div>
+    <div class='card-container'>
+      <div class='card'>
+        <div class='card-front'>
+          <img src='images/amp-dev.png' alt='Template 5'>
+        </div>
+        <div class='card-back'>
+          <h3>AMP Emailer</h3>
+          <p>Offers interactivity and functionality inside an email</p>
+         <button class="preview-btn" ><a href="https://lokeshp26.github.io/Amp/" target="_blank" style="color: #ffffff; text-decoration: none; font-size: 13px; font-weight: bold;"> Click to Preview</a></button>
+        </div>
+      </div>
+    </div>
+    <div class='card-container'>
+      <div class='card'>
+        <div class='card-front'>
+          <img src='images/LP.jpg' alt='Template 6'>
+        </div>
+        <div class='card-back'>
+          <h3>Landing Page</h3>
+          <p>Make the Best First Impression</p>
+         <button class="preview-btn" ><a href="https://lokeshp26.github.io/LP1/" target="_blank" style="color: #ffffff; text-decoration: none; font-size: 13px; font-weight: bold;"> Click to Preview</a></button>
+        </div>
+      </div>
+    </div>
+   
+  </section>
+
+  <!-- Modal -->
+  <div id="previewModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Email Template Preview</h2>
+      <iframe id="previewFrame" srcdoc="" width="100%" height="300px" style="border:none;"></iframe>
+    </div>
+  </div>
+
+     <div class="logo" style="text-align: center; margin-bottom: 30px; margin-top: 0px;"><a class="btn" href="./Resume.zip" style="font-size: 18px; line-height: 40px; font-weight: bold;">Download Resume</a></div>
+
+  <footer id="contact">
+
+    <div class="footer-top">
+      <div class="logo footer_flex"><img src="images/logo_5.jpg"></div>
+      <div class="contact-info footer_flex">
+		   <p style="margin: 0; margin-top: 6px; margin-bottom: 12px; font-size: 20px;"><strong>Contact</strong></p>
+        <p><strong>Email:</strong> logzilokesh@gmail.com</p>
+        <p><strong>Phone:</strong> 744 850 8380</p>
+      </div>
+      <div class="social footer_flex">
+        <p>Follow Us</p>
+        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.instagram.com/logzi_lokesh?igsh=NXAxOGE0dGthcTdo" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/lokesh-p-0206b3228?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://lokeshp26.github.io/Portfolio/?fbclid=PAQ0xDSwKcQQZleHRuA2FlbQIxMQABp0mAL2Grtq1lwXLDmmjyq8Fhb2DVeactdRvRkZXr5IPTHEfZlkp8lJC1zv5n_aem_HIyNR9O6oZmWQB3JnrC9Hw" target="_blank"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </footer>
+<script>
+	function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('show');
+        }
+    function openModal(templateId) {
+      const previews = [
+        "<h2 style='color:#5a2a9c;'>Standard Template</h2><p>This is a preview.</p>",
+        "<h2 style='color:#5a2a9c;'>Promo Email</h2><p>Promo content.</p>",
+        "<h2 style='color:#5a2a9c;'>Newsletter</h2><p>Newsletter content.</p>",
+        "<h2 style='color:#5a2a9c;'>Welcome Email</h2><p>Welcome message.</p>",
+        "<h2 style='color:#5a2a9c;'>Product Showcase</h2><p>Product highlights.</p>",
+        "<h2 style='color:#5a2a9c;'>Event Invite</h2><p>Join our event!</p>",
+      ];
+      document.getElementById("previewFrame").srcdoc = previews[templateId - 1];
+      document.getElementById("previewModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("previewModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("previewModal");
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>
